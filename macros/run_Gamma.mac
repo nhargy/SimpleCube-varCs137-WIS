@@ -1,0 +1,31 @@
+#########################
+### MACRO: Photon Gun ###
+#########################
+
+# Distance units: [mm]  
+
+/source/isIon 0
+/source/pdgSource 22
+/source/energySource 4
+
+# Cube dimensions
+/cube/Cube_Width 10
+/cube/Cube_Length 10
+/cube/Cube_Height 10
+
+# Fiducial Cube dimensions
+/cube/FiducialCube_Width 8
+/cube/FiducialCube_Length 8
+/cube/FiducialCube_Height 8
+
+# Cube position
+/cube/xCube 40
+/cube/yCube 0
+/cube/zCube 5
+
+# Lithium relative abundances
+/cube/Li7_percent 93
+/cube/Li6_percent 7
+
+/run/initialize
+/process/had/rdm/thresholdForVeryLongDecayTime 1.0e+3 year

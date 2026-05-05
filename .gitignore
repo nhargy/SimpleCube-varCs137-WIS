@@ -1,0 +1,8 @@
+build/
+logs/
+.vscode/
+lib/
+*.root
+Notebooks/
+loc_data/
+*.ipynb_checkpoints

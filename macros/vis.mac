@@ -1,0 +1,61 @@
+/run/verbose 1
+/event/verbose 1
+/tracking/verbose 1
+/control/echo true
+
+/vis/verbose warnings
+
+# 1) Build the world FIRST (even if C++ also calls Initialize, this is harmless)
+/run/initialize
+/process/had/rdm/thresholdForVeryLongDecayTime 1.0e+10 year
+
+# 2) Open an explicit viewer (avoid the generic OGL alias)
+/vis/open OGLSQt 1000x800-0+0
+# If Wayland gives you a blank canvas:
+# (run the program with)  QT_QPA_PLATFORM=xcb
+
+# 3) Create scene and attach BEFORE any auto-refresh or draw
+/vis/scene/create
+/vis/scene/add/volume
+/vis/sceneHandler/attach
+
+# 4) Now it’s safe to configure the camera and auto-refresh
+/vis/viewer/set/style surface
+/vis/viewer/set/edge true
+/vis/viewer/set/auxiliaryEdge true
+/vis/viewer/set/hiddenEdge false  
+/vis/viewer/set/autoRefresh true
+/vis/viewer/reset
+/vis/viewer/set/viewpointVector 0.5 0.6 0.9
+
+/vis/viewer/set/globalLineWidthScale 3.0
+/vis/geometry/set/lineWidth all 0 3.0
+
+
+# 5) Trajectories and overlays
+/vis/scene/add/trajectories smooth
+/vis/scene/add/eventID
+
+# /run/reinitializeGeometry
+
+# 7) Event accumulation control
+/vis/viewer/set/autoRefresh false
+/vis/scene/endOfEventAction accumulate
+/vis/viewer/set/autoRefresh true
+
+# Color tracks by particle type
+/vis/modeling/trajectories/create/drawByParticleID
+# Option A: use named colours
+#/vis/modeling/trajectories/drawByParticleID-0/set gamma yellow
+#/vis/modeling/trajectories/drawByParticleID-0/set e-    cyan
+
+# If 'orange' is not recognized by your build, use RGBA instead:
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA gamma 1.0 1.0 0.0 1.0
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA e-    0.0 1.0 1.0 1.0
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA neutron 0.0 1.0 0.0 1.0
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA nu_e 0.0 0.5 0.0 0.5
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA anti_nu_e 0.0 0.5 0.0 0.5
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA GenericIon 1.0 0.0 1.0 1.0
+
+# (Re)add trajectories to the scene (harmless if already present)
+/vis/scene/add/trajectories
