@@ -65,7 +65,7 @@ build_infofile() {
 # ------------ BUILD JOBSCRIPT -----------
 ###########################################
 build_jobscript() {
-    local jobscript="$1"source /cvmfs/sft.cern.ch/lcg/views/LCG_105/x86_64-el9-gcc12-opt/setup.sh
+    local jobscript="$1"
     local primaries="$2"
     local outfilename="$3"
     local macro="$4"
