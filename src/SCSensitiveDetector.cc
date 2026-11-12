@@ -28,22 +28,30 @@ G4bool SCSensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhis
 
     // Pre-step Coordinates
     G4StepPoint *preStepPoint = aStep->GetPreStepPoint();
-    G4float fX1 = preStepPoint->GetPosition().x();
-    G4float fY1 = preStepPoint->GetPosition().y();
-    G4float fZ1 = preStepPoint->GetPosition().z();
+    G4double fX1 = preStepPoint->GetPosition().x();
+    G4double fY1 = preStepPoint->GetPosition().y();
+    G4double fZ1 = preStepPoint->GetPosition().z();
 
     // Post-step Coordinates
     G4StepPoint *postStepPoint = aStep->GetPostStepPoint();
-    G4float fX2 = postStepPoint->GetPosition().x();
-    G4float fY2 = postStepPoint->GetPosition().y();
-    G4float fZ2 = postStepPoint->GetPosition().z();
+    G4double fX2 = postStepPoint->GetPosition().x();
+    G4double fY2 = postStepPoint->GetPosition().y();
+    G4double fZ2 = postStepPoint->GetPosition().z();
 
     // Kinetic Energy
-    G4float fK1    = preStepPoint->GetKineticEnergy();
-    G4float fK2    = postStepPoint->GetKineticEnergy();
+    G4double fK1    = preStepPoint->GetKineticEnergy();
+    G4double fK2    = postStepPoint->GetKineticEnergy();
 
     // Energy Deposition
     G4double fEdep = aStep->GetTotalEnergyDeposit();
+
+    // True step length, accounting for multiple scattering
+    G4double fStepLength = aStep->GetStepLength();
+
+    // Straight-line displacement between step endpoints
+    G4double fChordLength =
+        (postStepPoint->GetPosition()
+        - preStepPoint->GetPosition()).mag();
 
     // Interaction Process
     //const G4VProcess *preProc = preStepPoint->GetProcessDefinedStep(); 
@@ -83,7 +91,8 @@ G4bool SCSensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhis
     analysisManager->FillNtupleDColumn(0, 11, fK1);
     analysisManager->FillNtupleDColumn(0, 12, fK2);
     analysisManager->FillNtupleDColumn(0, 13, fEdep);
-    //analysisManager->FillNtupleDColumn(0, 16, fSec);
+    analysisManager->FillNtupleDColumn(0, 14, fStepLength);
+    analysisManager->FillNtupleDColumn(0, 15, fChordLength);
     analysisManager->AddNtupleRow(0);
 
     return true;

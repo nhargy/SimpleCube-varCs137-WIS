@@ -22,12 +22,14 @@ def read_root_file(
                     'fZ2', 
                     'fK1',
                     'fK2',
-                    'fEdep'
+                    'fEdep',
+                    'fStepLength',
+                    'fChordLength'
                     ]
         
         data = tree.arrays(
             branches, 
-            filter_name='nsteps', 
+            #filter_name='nsteps', 
             library='np'
             )
 

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+DIR=Phoenix
+ISO=Cs137
+CUB=zero_v2
+
 ###########################################
 # -----------  GLOBAL DEFAULTS -----------
 ###########################################
@@ -107,12 +111,12 @@ MACRO_BASENAME=$(basename "$MACROFILE")
 MACRO_TAG="${MACRO_BASENAME%.*}"
 MACRO_TAG="${MACRO_TAG#run_}"
 DIRNAME="${MACRO_TAG}-${SERIAL}"
-INFOPATH="/storage/xenon/${USER}/SimpleCube/${DIRNAME}/info.txt"
+INFOPATH="/storage/xenon/${USER}/$DIR/$ISO/$CUB/${DIRNAME}/info.txt"
 
 # Make data storage directories
-mkdir -p "/storage/xenon/$USER/SimpleCube/$DIRNAME/raw"
-mkdir -p "/storage/xenon/$USER/SimpleCube/$DIRNAME/proc"
-mkdir -p "/storage/xenon/$USER/SimpleCube/$DIRNAME/log"
+mkdir -p "/storage/xenon/$USER/$DIR/$ISO/$CUB/$DIRNAME/raw"
+mkdir -p "/storage/xenon/$USER/$DIR/$ISO/$CUB/$DIRNAME/proc"
+mkdir -p "/storage/xenon/$USER/$DIR/$ISO/$CUB/$DIRNAME/log"
 
 DATETIME="$(date +"%d-%m-%y %H:%M:%S")"
 build_infofile "$INFOPATH" "$DIRNAME" "$PRIMARIES" "$MACROFILE" "$NUM_JOBS" "$DATETIME"

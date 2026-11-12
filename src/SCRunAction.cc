@@ -26,7 +26,8 @@ SCRunAction::SCRunAction()
     analysisManager->CreateNtupleDColumn("fK1");
     analysisManager->CreateNtupleDColumn("fK2");
     analysisManager->CreateNtupleDColumn("fEdep");
-    //analysisManager->CreateNtupleDColumn("fSec");
+    analysisManager->CreateNtupleDColumn("fStepLength");
+    analysisManager->CreateNtupleDColumn("fChordLength");
     analysisManager->FinishNtuple(0);
 }
 

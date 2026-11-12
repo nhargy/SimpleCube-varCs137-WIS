@@ -14,9 +14,9 @@
 /cube/Cube_Height 10
 
 # Fiducial Cube dimensions
-/cube/FiducialCube_Width 8
-/cube/FiducialCube_Length 8
-/cube/FiducialCube_Height 8
+/cube/FiducialCube_Width 1
+/cube/FiducialCube_Length 1
+/cube/FiducialCube_Height 1
 
 # Cube position
 /cube/xCube 40
